@@ -84,7 +84,7 @@ export default function App() {
     }
 
     return (
-        <div className="min-h-screen bg-white dark:bg-gray-900 flex flex-col items-center justify-center p-4">
+        <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex flex-col items-center justify-center p-4">
             {/* Header with controls */}
             <div className="w-full max-w-6xl mb-4 grid grid-cols-3 items-center">
                 <div className="flex justify-start">
