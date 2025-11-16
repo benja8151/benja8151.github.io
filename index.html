@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Image Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        #single-view {
+            margin-bottom: 20px;
+        }
+        #image {
+            max-width: 80%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #all-view {
+            display: none;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+        .grid img {
+            width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Random Image Viewer</h1>
+    
+    <div id="single-view">
+        <img id="image" src="" alt="Random Image">
+        <br>
+        <button id="next">Next Image</button>
+    </div>
+    
+    <div id="all-view">
+        <div class="grid" id="grid"></div>
+    </div>
+    
+    <button id="toggle">Show All</button>
+    
+    <script>
+        // Replace this array with your list of image URLs
+        const imageUrls = [
+            "https://picsum.photos/200/300",
+            "https://picsum.photos/200/300",
+            "https://picsum.photos/200/300",
+            "https://picsum.photos/200/300",
+            "https://picsum.photos/200/300",
+            "https://picsum.photos/200/300",
+            // Add more URLs here
+        ];
+        
+        let shuffled = [];
+        let currentIndex = 0;
+        
+        function shuffleArray(array) {
+            const shuffledArray = [...array];
+            for (let i = shuffledArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+            }
+            return shuffledArray;
+        }
+        
+        function showNextImage() {
+            if (currentIndex >= shuffled.length) {
+                shuffled = shuffleArray(imageUrls);
+                currentIndex = 0;
+            }
+            document.getElementById('image').src = shuffled[currentIndex];
+            currentIndex++;
+        }
+        
+        function populateGrid() {
+            const grid = document.getElementById('grid');
+            grid.innerHTML = ''; // Clear if needed
+            imageUrls.forEach(url => {
+                const img = document.createElement('img');
+                img.src = url;
+                img.alt = 'Image';
+                grid.appendChild(img);
+            });
+        }
+        
+        function toggleView() {
+            const singleView = document.getElementById('single-view');
+            const allView = document.getElementById('all-view');
+            const toggleBtn = document.getElementById('toggle');
+            
+            if (allView.style.display === 'none') {
+                singleView.style.display = 'none';
+                allView.style.display = 'block';
+                toggleBtn.textContent = 'Show Single';
+                if (!document.getElementById('grid').hasChildNodes()) {
+                    populateGrid();
+                }
+            } else {
+                singleView.style.display = 'block';
+                allView.style.display = 'none';
+                toggleBtn.textContent = 'Show All';
+            }
+        }
+        
+        // Initialize
+        shuffled = shuffleArray(imageUrls);
+        showNextImage();
+        
+        document.getElementById('next').addEventListener('click', showNextImage);
+        document.getElementById('toggle').addEventListener('click', toggleView);
+    </script>
+</body>
+</html>
