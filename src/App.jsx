@@ -102,8 +102,8 @@ export default function App() {
                         </svg>
                     )}
                 </button>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
-                    Pattern {currentIndex + 1}
+                <div className="text-lg text-gray-600 dark:text-gray-400">
+                    Pattern #{currentIndex + 1}
                 </div>
                 <button
                     onClick={() => setShowAll(!showAll)}
