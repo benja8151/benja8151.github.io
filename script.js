@@ -62,9 +62,7 @@ function toggleView() {
         singleView.style.display = 'none';
         allView.style.display = 'block';
         toggleBtn.textContent = 'Show Single';
-        if (!document.getElementById('grid').hasChildNodes()) {
-            populateGrid();
-        }
+        populateGrid(); // Always populate on show to ensure it's loaded
     } else {
         singleView.style.display = 'block';
         allView.style.display = 'none';
@@ -78,3 +76,9 @@ showNextImage();
 
 document.getElementById('next').addEventListener('click', showNextImage);
 document.getElementById('toggle').addEventListener('click', toggleView);
+
+const modeToggle = document.getElementById('mode-toggle');
+modeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    modeToggle.textContent = document.body.classList.contains('dark') ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+});
