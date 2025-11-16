@@ -28,12 +28,20 @@ export default function App() {
         return cached ? JSON.parse(cached) : window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
     })
 
-    const [order, setOrder] = useState(() => {
-        const cached = localStorage.getItem('ipviewer:order')
-        if (cached) return JSON.parse(cached)
-        return shuffle(IMAGES.map((_, i) => i))
+    const [currentIndex, setCurrentIndex] = useState(() => {
+        const cached = localStorage.getItem('ipviewer:currentIndex')
+        return cached ? Number(cached) : Math.floor(Math.random() * IMAGES.length)
     })
-    const [pos, setPos] = useState(() => Number(localStorage.getItem('ipviewer:pos') || 0))
+    const [seen, setSeen] = useState(() => {
+        const cached = localStorage.getItem('ipviewer:seen')
+        if (cached) {
+            return JSON.parse(cached)
+        }
+        // Initialize with current index
+        const cachedIndex = localStorage.getItem('ipviewer:currentIndex')
+        const initialIndex = cachedIndex ? Number(cachedIndex) : Math.floor(Math.random() * IMAGES.length)
+        return [initialIndex]
+    })
     const [showAll, setShowAll] = useState(false)
 
     useEffect(() => {
@@ -42,34 +50,39 @@ export default function App() {
     }, [dark])
 
     useEffect(() => {
-        localStorage.setItem('ipviewer:order', JSON.stringify(order))
-    }, [order])
+        localStorage.setItem('ipviewer:currentIndex', String(currentIndex))
+    }, [currentIndex])
 
     useEffect(() => {
-        localStorage.setItem('ipviewer:pos', String(pos))
-    }, [pos])
+        localStorage.setItem('ipviewer:seen', JSON.stringify(seen))
+    }, [seen])
 
-    const currentIndex = order[pos % order.length]
+    // Ensure current index is marked as seen on mount
+    useEffect(() => {
+        setSeen(prev => prev.includes(currentIndex) ? prev : [...prev, currentIndex])
+    }, []) // Only run on mount
+
     const currentImage = IMAGES[currentIndex]
+    const unseenImages = IMAGES.map((_, i) => i).filter(idx => !seen.includes(idx))
+    const remainingCount = unseenImages.length
 
-    function handleNext() {
-        // advance pos; if we've shown all images (pos+1 === order.length) we reshuffle but keep random start
-        const nextPos = pos + 1
-        if (nextPos >= order.length) {
-            const newOrder = shuffle(IMAGES.map((_, i) => i))
-            setOrder(newOrder)
-            setPos(0)
+    function handleNextPattern() {
+        setShowAll(false)
+        
+        // Get all unseen images
+        const unseen = IMAGES.map((_, i) => i).filter(idx => !seen.includes(idx))
+        
+        if (unseen.length === 0) {
+            // All images have been seen, reset and pick a random one
+            const newIndex = Math.floor(Math.random() * IMAGES.length)
+            setCurrentIndex(newIndex)
+            setSeen([newIndex])
         } else {
-            setPos(nextPos)
+            // Randomly select from unseen images
+            const randomUnseenIndex = unseen[Math.floor(Math.random() * unseen.length)]
+            setCurrentIndex(randomUnseenIndex)
+            setSeen(prev => [...prev, randomUnseenIndex])
         }
-        setShowAll(false)
-    }
-
-    function handleRandomStart() {
-        const newOrder = shuffle(IMAGES.map((_, i) => i))
-        setOrder(newOrder)
-        setPos(0)
-        setShowAll(false)
     }
 
     return (
@@ -83,7 +96,7 @@ export default function App() {
                     {dark ? '☀️ Light' : '🌙 Dark'}
                 </button>
                 <div className="text-sm text-gray-600 dark:text-gray-400">
-                    Image {pos + 1} of {order.length}
+                    {remainingCount > 0 ? `${remainingCount} remaining` : 'All seen - restarting'}
                 </div>
                 <button
                     onClick={() => setShowAll(!showAll)}
@@ -104,11 +117,9 @@ export default function App() {
                                     : 'border-transparent'
                                 }`}
                             onClick={() => {
-                                const newPos = order.indexOf(idx)
-                                if (newPos !== -1) {
-                                    setPos(newPos)
-                                    setShowAll(false)
-                                }
+                                setCurrentIndex(idx)
+                                setSeen(prev => prev.includes(idx) ? prev : [...prev, idx])
+                                setShowAll(false)
                             }}
                         >
                             <img
@@ -129,19 +140,13 @@ export default function App() {
                         />
                     </div>
 
-                    {/* Navigation buttons */}
-                    <div className="mt-6 flex justify-center gap-4">
+                    {/* Navigation button */}
+                    <div className="mt-6 flex justify-center">
                         <button
-                            onClick={handleRandomStart}
-                            className="px-6 py-3 rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-medium transition-colors"
+                            onClick={handleNextPattern}
+                            className="px-8 py-3 rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-medium transition-colors text-lg"
                         >
-                            🎲 Random Start
-                        </button>
-                        <button
-                            onClick={handleNext}
-                            className="px-6 py-3 rounded-lg bg-green-500 hover:bg-green-600 text-white font-medium transition-colors"
-                        >
-                            ➡️ Next
+                            Next Pattern
                         </button>
                     </div>
                 </div>
