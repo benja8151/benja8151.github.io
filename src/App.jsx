@@ -63,8 +63,6 @@ export default function App() {
     }, []) // Only run on mount
 
     const currentImage = IMAGES[currentIndex]
-    const unseenImages = IMAGES.map((_, i) => i).filter(idx => !seen.includes(idx))
-    const remainingCount = unseenImages.length
 
     function handleNextPattern() {
         setShowAll(false)
@@ -96,7 +94,7 @@ export default function App() {
                     {dark ? '☀️ Light' : '🌙 Dark'}
                 </button>
                 <div className="text-sm text-gray-600 dark:text-gray-400">
-                    {remainingCount > 0 ? `${remainingCount} remaining` : 'All seen - restarting'}
+                    Pattern {currentIndex + 1}
                 </div>
                 <button
                     onClick={() => setShowAll(!showAll)}
