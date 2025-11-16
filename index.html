@@ -1,31 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="h-full">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Image Viewer</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Pattern Viewer</title>
 </head>
-<body>
-    <h1>Random Image Viewer</h1>
-    <button id="mode-toggle">Switch to Dark Mode</button>
-    
-    <main>
-        <div id="single-view">
-            <h2 id="title"></h2>
-            <div class="image-card">
-                <img id="image" src="" alt="Random Image">
-            </div>
-            <button id="next">Next Image</button>
-        </div>
-        
-        <div id="all-view">
-            <div class="grid" id="grid"></div>
-        </div>
-    </main>
-    
-    <button id="toggle">Show All</button>
-    
-    <script src="script.js"></script>
+
+<body class="h-full">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
 </body>
+
 </html>

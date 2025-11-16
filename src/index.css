@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* custom layer */
+:root {
+    --card-radius: 18px;
+}
+
+
+html,
+body,
+#root {
+    height: 100%;
+}
+
+
+/* paper-like container subtle border */
+.paper {
+    border-radius: var(--card-radius);
+}
+
+
+/* small responsive tweaks */
+@media (max-width: 640px) {
+    .paper {
+        padding: 8px;
+    }
+}
