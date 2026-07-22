@@ -1,0 +1,45 @@
+---
+import { profile } from '../data/cv';
+const { social } = profile;
+const year = new Date().getFullYear();
+---
+
+<footer id="contact" class="scroll-mt-20 border-t border-white/5 py-24">
+  <div class="mx-auto max-w-5xl px-5 text-center sm:px-8">
+    <p class="eyebrow">Contact</p>
+    <h2 class="reveal mt-3 text-3xl font-semibold tracking-tight text-fog-100 sm:text-4xl">
+      Let&rsquo;s build something.
+    </h2>
+    <p class="reveal mx-auto mt-4 max-w-xl leading-relaxed text-fog-400">
+      Open to interesting mobile and full-stack work. The fastest way to reach me is email.
+    </p>
+
+    <a
+      href={`mailto:${social.email}`}
+      class="reveal mt-8 inline-flex items-center gap-2 rounded-full bg-accent-500 px-6 py-3 text-base font-semibold text-ink-950 transition-colors hover:bg-accent-400"
+    >
+      {social.email}
+    </a>
+
+    <div class="reveal mt-6 flex justify-center gap-3">
+      <a
+        href={social.github}
+        rel="noopener"
+        class="rounded-full border border-white/10 px-5 py-2 text-sm font-medium text-fog-200 transition-colors hover:border-white/25 hover:text-fog-100"
+      >
+        GitHub
+      </a>
+      <a
+        href={social.linkedin}
+        rel="noopener"
+        class="rounded-full border border-white/10 px-5 py-2 text-sm font-medium text-fog-200 transition-colors hover:border-white/25 hover:text-fog-100"
+      >
+        LinkedIn
+      </a>
+    </div>
+
+    <p class="mt-16 font-mono text-xs text-fog-500">
+      &copy; {year} {profile.name} &middot; Built with Astro &amp; Tailwind
+    </p>
+  </div>
+</footer>

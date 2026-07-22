@@ -1,0 +1,20 @@
+---
+import Section from './Section.astro';
+import { education } from '../data/cv';
+---
+
+<Section id="education" eyebrow="Education" title="Academic background">
+  <ul class="divide-y divide-white/5 rounded-2xl border border-white/5 bg-ink-900/40">
+    {
+      education.map((e) => (
+        <li class="reveal flex flex-col gap-1 p-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+          <div>
+            <p class="font-medium text-fog-100">{e.program}</p>
+            <p class="text-sm text-fog-500">{e.institution}</p>
+          </div>
+          <span class="font-mono text-xs tracking-wide text-accent-400">{e.period}</span>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

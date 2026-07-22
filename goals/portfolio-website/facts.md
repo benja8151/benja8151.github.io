@@ -1,0 +1,23 @@
+# Facts — Benjamin Smrdelj Portfolio Website
+
+- The site is built with Astro and styled with Tailwind CSS, producing a fully static build.
+- Interactivity (the experience-timeline reveal) is implemented with lightweight vanilla TypeScript (IntersectionObserver + CSS transitions); no client-side UI framework is used. A React island may be added later only if a genuinely stateful widget is introduced.
+- The site deploys to GitHub Pages via a GitHub Actions workflow, from a user-site repo named benja8151.github.io, serving at the root URL https://benja8151.github.io.
+- The site is a single long-scroll page with a slim sticky navigation bar that anchor-jumps to each section.
+- The theme is dark by default (rich charcoal/slate background, not pure black) with a single restrained, desaturated accent color, and has no light/dark toggle.
+- Body text uses a refined sans-serif font; monospace is used only for small labels/tags, avoiding cliché terminal/neon/matrix dev tropes.
+- The layout is responsive and reads well on mobile and desktop.
+- Animations and scroll effects respect prefers-reduced-motion and provide a static fallback.
+- A hero section shows the name, the 'Full-Stack & Mobile Engineer' tagline, a short intro, links to GitHub/LinkedIn/email, and a 'Download CV' button.
+- An About section presents a condensed, web-tightened version of the CV's About Me text.
+- A Skills section restyles the CV proficiency table as visual skill groups/tags rather than a plain table.
+- An Experience section is a scroll-linked timeline: normal scrolling with a sticky progress rail and content that reveals/animates as each role enters view — NOT full scroll-hijacking.
+- The timeline covers roles chronologically — Junior at Comtrade (acquired by Endava in 2020) -> Senior Engineer at Endava leading Avant2GO -> Lead Mobile Engineer at The NU — plus education, with the Postojna Cave seasonal job present but minimal.
+- A Projects/Showcase section features three products as image-forward cards: The NU (hero, largest visual treatment), Avant2GO, and AMZS route-planning app.
+- Project imagery uses device-frame mockup slots and logo slots that ship with tasteful placeholders and can be swapped by dropping files into a defined public/assets folder without changing layout; required counts/dimensions are documented.
+- A compact Education section lists the degrees/programs from the CV.
+- A contact/footer section provides a prominent email link plus GitHub and LinkedIn buttons; there is no contact form.
+- The Download CV button links to a temporary placeholder PDF that the user will later replace with their own supplied PDF.
+- No analytics are included.
+- Because Astro renders real HTML, the page content (headings, role text, project descriptions) is present in the static HTML and indexable, with basic meta tags/title set for SEO.
+- An embedded Flutter Web demo is explicitly out of scope for now and noted as a possible future enhancement.

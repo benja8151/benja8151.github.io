@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="AM logo placeholder">
+  <rect width="512" height="512" rx="112" fill="#1c2430"/>
+  <rect x="24" y="24" width="464" height="464" rx="96" fill="none" stroke="#d1957f" stroke-width="6" opacity="0.5"/>
+  <text x="256" y="300" font-family="monospace" font-size="150" font-weight="700" fill="#d1957f" text-anchor="middle">AM</text>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="og" cx="50%" cy="0%" r="80%">
+      <stop offset="0" stop-color="#173029"/>
+      <stop offset="1" stop-color="#0d1117"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#og)"/>
+  <text x="80" y="300" font-family="sans-serif" font-size="72" font-weight="700" fill="#e8ecf2">Benjamin Smrdelj</text>
+  <text x="82" y="370" font-family="sans-serif" font-size="40" fill="#4fb3a6">Full-Stack &amp; Mobile Engineer</text>
+  <text x="82" y="440" font-family="monospace" font-size="28" fill="#7c8798">Flutter · React · Go · Node.js · AWS</text>
+</svg>

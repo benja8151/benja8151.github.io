@@ -1,0 +1,14 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+}
+const { src, alt, class: className = '' } = Astro.props;
+---
+
+<div class={`device-frame relative aspect-[1170/2532] overflow-hidden rounded-[2rem] border border-white/10 bg-ink-800 shadow-2xl shadow-black/40 ${className}`}>
+  <!-- notch -->
+  <div class="absolute top-2 left-1/2 z-10 h-4 w-20 -translate-x-1/2 rounded-full bg-ink-950/80" aria-hidden="true"></div>
+  <img src={src} alt={alt} loading="lazy" decoding="async" class="h-full w-full object-cover" />
+</div>

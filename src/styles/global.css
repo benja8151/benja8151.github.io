@@ -1,0 +1,111 @@
+@import 'tailwindcss';
+
+/* Variable sans + monospace only for small labels/tags. */
+@import '@fontsource-variable/inter';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+
+/* ---- Design tokens (Tailwind v4 @theme) ---------------------------------- */
+@theme {
+  /* Rich charcoal/slate background scale — deliberately not pure black. */
+  --color-ink-950: #0d1117;
+  --color-ink-900: #11161f;
+  --color-ink-850: #161c27;
+  --color-ink-800: #1c2430;
+  --color-ink-700: #2a3444;
+  --color-ink-600: #3b4757;
+
+  /* Text scale. */
+  --color-fog-100: #e8ecf2;
+  --color-fog-200: #d4dae4;
+  --color-fog-400: #9aa4b4;
+  --color-fog-500: #7c8798;
+
+  /* Single restrained, desaturated accent (muted teal). */
+  --color-accent-300: #7fd1c4;
+  --color-accent-400: #4fb3a6;
+  --color-accent-500: #2f9c8f;
+  --color-accent-600: #268377;
+
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+}
+
+/* ---- Base ---------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* offset for the sticky nav on anchor jumps */
+}
+
+body {
+  background-color: var(--color-ink-950);
+  color: var(--color-fog-200);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Subtle top-of-page glow behind the hero. */
+.bg-hero-glow {
+  background:
+    radial-gradient(60% 55% at 50% -10%, rgba(47, 156, 143, 0.16), transparent 70%),
+    radial-gradient(40% 40% at 85% 5%, rgba(79, 179, 166, 0.08), transparent 70%);
+}
+
+/* Monospace label chip used across sections. */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent-400);
+}
+
+/* ---- Scroll-reveal animation (Experience + general) ---------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Progress fill along the experience rail. */
+.rail-fill {
+  transition: height 0.15s linear;
+}
+
+/* Respect reduced motion: no smooth scroll, no transforms, everything visible. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .rail-fill {
+    transition: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Accessible focus ring across interactive elements. */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-accent-400);
+  outline-offset: 3px;
+  border-radius: 4px;
+}

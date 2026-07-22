@@ -1,0 +1,10 @@
+---
+import Section from './Section.astro';
+import { about } from '../data/cv';
+---
+
+<Section id="about" eyebrow="About" title="Working across the stack">
+  <div class="reveal max-w-3xl space-y-5 text-lg leading-relaxed text-fog-400">
+    {about.map((p) => <p>{p}</p>)}
+  </div>
+</Section>
