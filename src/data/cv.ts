@@ -189,14 +189,19 @@ export const projects: Project[] = [
     },
     mockups: [
       {
-        src: '/assets/the-nu/screen-1.svg',
+        src: '/assets/the-nu/screen-1.png',
         alt: 'The NU app — home screen',
-        dimensions: '1170\u00d72532 (iPhone portrait screenshot)',
+        dimensions: '1170\u00d72532 (iPhone portrait screenshot, PNG)',
       },
       {
-        src: '/assets/the-nu/screen-2.svg',
+        src: '/assets/the-nu/screen-2.png',
         alt: 'The NU app — insights screen',
-        dimensions: '1170\u00d72532 (iPhone portrait screenshot)',
+        dimensions: '1170\u00d72532 (iPhone portrait screenshot, PNG)',
+      },
+      {
+        src: '/assets/the-nu/screen-3.png',
+        alt: 'The NU app — activity screen',
+        dimensions: '1170\u00d72532 (iPhone portrait screenshot, PNG)',
       },
     ],
   },
@@ -215,9 +220,19 @@ export const projects: Project[] = [
     },
     mockups: [
       {
-        src: '/assets/avant2go/screen-1.svg',
+        src: '/assets/avant2go/screen-1.png',
+        alt: 'Avant2GO — map screen',
+        dimensions: '1170\u00d72532 (iPhone portrait screenshot, PNG)',
+      },
+      {
+        src: '/assets/avant2go/screen-2.png',
         alt: 'Avant2GO — booking screen',
-        dimensions: '1170\u00d72532 (iPhone portrait screenshot)',
+        dimensions: '1170\u00d72532 (iPhone portrait screenshot, PNG)',
+      },
+      {
+        src: '/assets/avant2go/screen-3.png',
+        alt: 'Avant2GO — trip screen',
+        dimensions: '1170\u00d72532 (iPhone portrait screenshot, PNG)',
       },
     ],
   },
@@ -236,9 +251,19 @@ export const projects: Project[] = [
     },
     mockups: [
       {
-        src: '/assets/amzs/screen-1.svg',
+        src: '/assets/amzs/screen-1.png',
+        alt: 'AMZS route planner — route screen',
+        dimensions: '1170\u00d72532 (iPhone portrait screenshot, PNG)',
+      },
+      {
+        src: '/assets/amzs/screen-2.png',
         alt: 'AMZS route planner — map screen',
-        dimensions: '1170\u00d72532 (iPhone portrait screenshot)',
+        dimensions: '1170\u00d72532 (iPhone portrait screenshot, PNG)',
+      },
+      {
+        src: '/assets/amzs/screen-3.png',
+        alt: 'AMZS route planner — steps screen',
+        dimensions: '1170\u00d72532 (iPhone portrait screenshot, PNG)',
       },
     ],
   },

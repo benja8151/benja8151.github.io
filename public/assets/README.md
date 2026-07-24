@@ -16,15 +16,20 @@ If you supply PNGs, name them `.png` and update the `logo.src` paths in
 `src/data/cv.ts` (the only place asset paths are declared).
 
 ## Device screenshots — `public/assets/<project>/`
-Portrait phone screenshots shown inside a device frame. Aspect ratio **1170×2532**
-(iPhone). Any resolution with that ratio works; they are object-cover cropped.
+Portrait phone screenshots shown in a horizontally-scrollable **carousel** (swipe on
+touch, prev/next buttons + dots on desktop). **PNG**, portrait aspect ratio
+**1170×2532** (iPhone); any resolution with that ratio works — they are `object-cover`
+cropped.
 
-| File | Product | Notes |
+Add as many as you like per project: name them `screen-1.png`, `screen-2.png`,
+`screen-3.png`, … and list them in that project's `mockups` array in
+`src/data/cv.ts` (order = carousel order). Remove entries to show fewer.
+
+| Folder | Product | Ships with |
 |---|---|---|
-| `the-nu/screen-1.svg` | The NU | primary (largest treatment) |
-| `the-nu/screen-2.svg` | The NU | secondary (shown on ≥sm) |
-| `avant2go/screen-1.svg` | Avant2GO | logo-only fallback works if no screenshot |
-| `amzs/screen-1.svg` | AMZS | map screen |
+| `the-nu/` | The NU | `screen-1.png` … `screen-3.png` |
+| `avant2go/` | Avant2GO | `screen-1.png` … `screen-3.png` |
+| `amzs/` | AMZS | `screen-1.png` … `screen-3.png` |
 
 ## Profile photo — `public/assets/`
 The hero portrait. Portrait orientation, aspect ratio **4:5** (e.g. 800×1000). Shown

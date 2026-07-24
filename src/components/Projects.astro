@@ -1,6 +1,6 @@
 ---
 import Section from './Section.astro';
-import DeviceFrame from './DeviceFrame.astro';
+import Carousel from './Carousel.astro';
 import { projects } from '../data/cv';
 const featured = projects.find((p) => p.featured)!;
 const rest = projects.filter((p) => !p.featured);
@@ -25,10 +25,8 @@ const rest = projects.filter((p) => !p.featured);
         ))}
       </div>
     </div>
-    <div class="order-1 flex justify-center gap-4 lg:order-2">
-      {featured.mockups.map((m, i) => (
-        <DeviceFrame src={m.src} alt={m.alt} class={`w-40 sm:w-48 ${i === 1 ? 'mt-8 hidden sm:block' : ''}`} />
-      ))}
+    <div class="order-1 mx-auto w-full max-w-sm lg:order-2">
+      <Carousel images={featured.mockups} frameClass="w-44 sm:w-52" label={`${featured.name} screenshots`} />
     </div>
   </article>
 
@@ -44,10 +42,8 @@ const rest = projects.filter((p) => !p.featured);
               <p class="font-mono text-xs tracking-wide text-accent-400">{p.tagline}</p>
             </div>
           </div>
-          <div class="my-6 flex justify-center">
-            {p.mockups.map((m) => (
-              <DeviceFrame src={m.src} alt={m.alt} class="w-32 sm:w-36" />
-            ))}
+          <div class="my-6">
+            <Carousel images={p.mockups} frameClass="w-36 sm:w-40" label={`${p.name} screenshots`} />
           </div>
           <p class="leading-relaxed text-fog-400">{p.description}</p>
           <p class="mt-3 text-sm text-fog-500">{p.role}</p>
