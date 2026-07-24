@@ -75,7 +75,10 @@ body {
   transform: translateY(0);
 }
 
-/* Progress fill along the experience rail. */
+/* Progress fill along the experience rail. Its target height is driven by the
+   rAF scroll handler in timeline.ts; the short transition just smooths the tip
+   between frames for a nicer feel. (The tip staying on screen is handled by the
+   pixel-anchored height math, not by this transition.) */
 .rail-fill {
   transition: height 0.15s linear;
 }
