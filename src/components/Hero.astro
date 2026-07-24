@@ -4,50 +4,77 @@ const { social } = profile;
 ---
 
 <section id="top" class="bg-hero-glow relative">
-  <div class="mx-auto flex min-h-[92svh] max-w-5xl flex-col justify-center px-5 pt-24 pb-16 sm:px-8">
-    <p class="eyebrow reveal">{profile.location}</p>
-    <h1
-      class="reveal mt-4 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-fog-100 sm:text-6xl lg:text-7xl"
-    >
-      {profile.name}
-    </h1>
-    <p class="reveal mt-4 text-xl font-medium text-accent-300 sm:text-2xl">
-      {profile.tagline}
-    </p>
-    <p class="reveal mt-6 max-w-2xl text-pretty text-base leading-relaxed text-fog-400 sm:text-lg">
-      {profile.intro}
-    </p>
+  <div
+    class="mx-auto grid min-h-[92svh] max-w-5xl grid-cols-1 items-center gap-10 px-5 pt-24 pb-16 sm:px-8 lg:grid-cols-[1fr_auto] lg:gap-16"
+  >
+    <div>
+      <p class="eyebrow reveal">{profile.location}</p>
+      <h1
+        class="reveal mt-4 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-fog-100 sm:text-6xl lg:text-7xl"
+      >
+        {profile.name}
+      </h1>
+      <p class="reveal mt-4 text-xl font-medium text-accent-300 sm:text-2xl">
+        {profile.tagline}
+      </p>
+      <p class="reveal mt-6 max-w-2xl text-pretty text-base leading-relaxed text-fog-400 sm:text-lg">
+        {profile.intro}
+      </p>
 
-    <div class="reveal mt-9 flex flex-wrap items-center gap-3">
-      <a
-        href={profile.cvPdf}
-        class="inline-flex items-center gap-2 rounded-full bg-accent-500 px-5 py-2.5 text-sm font-semibold text-ink-950 transition-colors hover:bg-accent-400"
-      >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Download CV
-      </a>
-      <a
-        href={`https://github.com/${social.github.split('/').pop()}`}
-        class="rounded-full border border-white/10 px-5 py-2.5 text-sm font-medium text-fog-200 transition-colors hover:border-white/25 hover:text-fog-100"
-        rel="noopener"
-      >
-        GitHub
-      </a>
-      <a
-        href={social.linkedin}
-        class="rounded-full border border-white/10 px-5 py-2.5 text-sm font-medium text-fog-200 transition-colors hover:border-white/25 hover:text-fog-100"
-        rel="noopener"
-      >
-        LinkedIn
-      </a>
-      <a
-        href={`mailto:${social.email}`}
-        class="rounded-full border border-white/10 px-5 py-2.5 text-sm font-medium text-fog-200 transition-colors hover:border-white/25 hover:text-fog-100"
-      >
-        Email
-      </a>
+      <div class="reveal mt-9 flex flex-wrap items-center gap-3">
+        <a
+          href={profile.cvPdf}
+          class="inline-flex items-center gap-2 rounded-full bg-accent-500 px-5 py-2.5 text-sm font-semibold text-ink-950 transition-colors hover:bg-accent-400"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Download CV
+        </a>
+        <a
+          href={`https://github.com/${social.github.split('/').pop()}`}
+          class="rounded-full border border-white/10 px-5 py-2.5 text-sm font-medium text-fog-200 transition-colors hover:border-white/25 hover:text-fog-100"
+          rel="noopener"
+        >
+          GitHub
+        </a>
+        <a
+          href={social.linkedin}
+          class="rounded-full border border-white/10 px-5 py-2.5 text-sm font-medium text-fog-200 transition-colors hover:border-white/25 hover:text-fog-100"
+          rel="noopener"
+        >
+          LinkedIn
+        </a>
+        <a
+          href={`mailto:${social.email}`}
+          class="rounded-full border border-white/10 px-5 py-2.5 text-sm font-medium text-fog-200 transition-colors hover:border-white/25 hover:text-fog-100"
+        >
+          Email
+        </a>
+      </div>
+    </div>
+
+    <!-- Framed portrait -->
+    <div class="reveal order-first flex justify-center lg:order-none">
+      <div class="relative">
+        <div
+          class="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-accent-500/25 via-accent-500/5 to-transparent blur-xl"
+          aria-hidden="true"
+        >
+        </div>
+        <div
+          class="relative aspect-[4/5] w-52 overflow-hidden rounded-[1.75rem] border border-white/10 bg-ink-800 shadow-2xl shadow-black/50 ring-1 ring-inset ring-white/5 sm:w-60 lg:w-64"
+        >
+          <img
+            src={profile.image}
+            alt={profile.imageAlt}
+            width="800"
+            height="1000"
+            decoding="async"
+            class="h-full w-full object-cover"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </section>

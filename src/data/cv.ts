@@ -14,6 +14,8 @@ export interface Profile {
   location: string;
   intro: string;
   social: SocialLinks;
+  image: string;
+  imageAlt: string;
   cvPdf: string;
 }
 
@@ -70,6 +72,8 @@ export const profile: Profile = {
     linkedin: 'https://www.linkedin.com/in/benjamin-smrdelj-14a637146/',
     email: 'benjamin.smrdelj@gmail.com',
   },
+  image: '/assets/profile.svg',
+  imageAlt: 'Portrait of Benjamin Smrdelj',
   cvPdf: '/cv-placeholder.pdf',
 };
 
@@ -103,7 +107,7 @@ export const skills: SkillGroup[] = [
   },
   {
     category: 'Tooling & Other',
-    proficient: ['Git', 'Codemagic', 'GitHub Actions', 'Sentry', 'Firebase', 'Figma'],
+    proficient: ['Git', 'Codemagic', 'GitHub Actions', 'Sentry', 'Firebase', 'Figma', 'AI coding agents (Kiro, Codex, OpenCode)'],
     familiar: ['Cypress', 'Stripe', 'Django'],
   },
 ];
@@ -163,6 +167,7 @@ export const experience: ExperienceRole[] = [
       'Helped design the serverless AWS infrastructure (Lambda, CloudFormation, DynamoDB) with cost-efficient indexing and query design',
       'Contributed to a backend migration from Node.js to Go',
       'Set up CI/CD (Codemagic, GitHub Actions) and integrated monitoring (Sentry, Firebase Crashlytics/Analytics)',
+      'Established a spec-driven workflow with AI coding agents (Kiro, Codex, OpenCode + OpenSpec)',
     ],
   },
 ];

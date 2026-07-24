@@ -26,6 +26,16 @@ Portrait phone screenshots shown inside a device frame. Aspect ratio **1170×253
 | `avant2go/screen-1.svg` | Avant2GO | logo-only fallback works if no screenshot |
 | `amzs/screen-1.svg` | AMZS | map screen |
 
+## Profile photo — `public/assets/`
+The hero portrait. Portrait orientation, aspect ratio **4:5** (e.g. 800×1000). Shown
+inside a rounded, framed container and cropped with `object-cover`.
+
+| File | Purpose | Recommended size |
+|---|---|---|
+| `profile.svg` | Hero portrait | 800×1000 (4:5) |
+
+To use a JPG/PNG instead, add the file and update `profile.image` in `src/data/cv.ts`.
+
 ## Social / SEO
 | File | Purpose | Size |
 |---|---|---|

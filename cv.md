@@ -23,7 +23,7 @@ Responsible, reliable, and precise, with a self-critical streak that keeps me im
 | **Backend** | Go, Node.js, REST APIs | Express, Fastify |
 | **Cloud & Databases** | AWS (Lambda, DynamoDB, Kinesis, S3, CloudFormation), MongoDB | Redis, Docker |
 | **Languages** | Dart, Go, TypeScript/JavaScript | Python, C#, C++ |
-| **Other** | Git (GitHub, GitLab), Codemagic, GitHub Actions, Sentry, Firebase, Figma | Cypress, Stripe, Django |
+| **Other** | Git (GitHub, GitLab), Codemagic, GitHub Actions, Sentry, Firebase, Figma, AI coding agents (Kiro, Codex, OpenCode) | Cypress, Stripe, Django |
 
 ## Experience
 
@@ -38,6 +38,7 @@ Mobile lead at an early-stage longevity startup, owning the Flutter app end-to-e
 - Helped design the serverless AWS infrastructure (Lambda, CloudFormation, DynamoDB), including cost-efficient DynamoDB indexing and query design
 - Contributed to a backend migration from Node.js to Go
 - Set up CI/CD pipelines (Codemagic, GitHub Actions) and integrated monitoring and crash reporting (Sentry, Firebase Crashlytics/Analytics)
+- Established a spec-driven workflow with AI coding agents (Kiro, Codex, OpenCode + OpenSpec)
 
 ### Senior Software Engineer — Avant2GO
 **Endava Digital Solutions** | 2020–2022
