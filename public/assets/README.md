@@ -32,9 +32,7 @@ inside a rounded, framed container and cropped with `object-cover`.
 
 | File | Purpose | Recommended size |
 |---|---|---|
-| `profile.svg` | Hero portrait | 800×1000 (4:5) |
-
-To use a JPG/PNG instead, add the file and update `profile.image` in `src/data/cv.ts`.
+| `profile.png` | Hero portrait | 800×1000 (4:5) |
 
 ## Social / SEO
 | File | Purpose | Size |

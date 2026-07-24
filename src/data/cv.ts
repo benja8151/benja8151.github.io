@@ -72,7 +72,7 @@ export const profile: Profile = {
     linkedin: 'https://www.linkedin.com/in/benjamin-smrdelj-14a637146/',
     email: 'benjamin.smrdelj@gmail.com',
   },
-  image: '/assets/profile.svg',
+  image: '/assets/profile.png',
   imageAlt: 'Portrait of Benjamin Smrdelj',
   cvPdf: '/cv-placeholder.pdf',
 };
