@@ -4,31 +4,38 @@ Drop real files here to replace the placeholders. **Keep the same filenames and
 aspect ratios** and the layout will not change.
 
 ## Logos — `public/assets/logos/`
-Square, transparent background (PNG or SVG). Rendered ~40–44px.
+Square, transparent-background **PNG**. Rendered ~40–44px.
 
 | File | Product | Recommended size |
 |---|---|---|
-| `the-nu.svg` | The NU | 512×512 |
-| `avant2go.svg` | Avant2GO | 512×512 |
-| `amzs.svg` | AMZS | 512×512 |
+| `the-nu.png` | The NU | 360×360 |
+| `avant2go.png` | Avant2GO | 360×360 |
+| `amzs.png` | AMZS | 360×360 |
 
-If you supply PNGs, name them `.png` and update the `logo.src` paths in
-`src/data/cv.ts` (the only place asset paths are declared).
+Asset paths are declared in `src/data/cv.ts` (the only place).
 
 ## Device screenshots — `public/assets/<project>/`
-Portrait phone screenshots shown in a horizontally-scrollable **carousel** (swipe on
-touch, prev/next buttons + dots on desktop). **PNG**, portrait aspect ratio
-**1170×2532** (iPhone); any resolution with that ratio works — they are `object-cover`
-cropped.
+Portrait phone screenshots shown in a horizontally-scrollable carousel (swipe on
+touch, prev/next buttons + dots on desktop). **The images must already include the
+device frame** — they are displayed as-is (natural aspect, no cropping). PNG with a
+transparent area around the frame looks best (the drop shadow follows the frame).
+
+Recommended size: **~765×1518** (downscaled from a 1530×3036 export). That is plenty
+for the on-page display (~210px wide) at up to 3× pixel density; larger just bloats
+the download.
 
 Add as many as you like per project: name them `screen-1.png`, `screen-2.png`,
 `screen-3.png`, … and list them in that project's `mockups` array in
 `src/data/cv.ts` (order = carousel order). Remove entries to show fewer.
 
+A project can instead show **one transparent PNG** (no carousel) by setting a
+`showcase` image in its `src/data/cv.ts` entry (see Avant2GO: `avant2go/product.png`).
+It's rendered centered with `object-contain` in the same-height slot as the carousel.
+
 | Folder | Product | Ships with |
 |---|---|---|
-| `the-nu/` | The NU | `screen-1.png` … `screen-3.png` |
-| `avant2go/` | Avant2GO | `screen-1.png` … `screen-3.png` |
+| `the-nu/` | The NU | `screen-1.png` … `screen-7.png` |
+| `avant2go/` | Avant2GO | `product.png` (single **transparent** PNG — no carousel) |
 | `amzs/` | AMZS | `screen-1.png` … `screen-3.png` |
 
 ## Profile photo — `public/assets/`

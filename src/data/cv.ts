@@ -52,6 +52,8 @@ export interface Project {
   stack: string[];
   logo: ProjectImageSlot;
   mockups: ProjectImageSlot[];
+  /** Single transparent image shown instead of the screenshot carousel. */
+  showcase?: ProjectImageSlot;
   featured?: boolean;
 }
 
@@ -175,33 +177,53 @@ export const experience: ExperienceRole[] = [
 export const projects: Project[] = [
   {
     id: 'the-nu',
-    name: 'The NU',
+    name: 'NU Pro',
     tagline: 'Longevity platform · Flutter + Go',
     description:
       'A multi-flavored Flutter app for an early-stage longevity startup, backed by a Go wearable-data ingestion pipeline on serverless AWS. I own the mobile app end-to-end and built the backend that processes 10,000+ messages per day.',
     role: 'Lead Mobile Engineer',
-    stack: ['Flutter', 'Go', 'AWS Lambda', 'DynamoDB'],
+    stack: ['Flutter', 'Go', 'AWS'],
     featured: true,
     logo: {
-      src: '/assets/logos/the-nu.svg',
-      alt: 'The NU logo',
-      dimensions: '512\u00d7512 (square, transparent PNG/SVG)',
+      src: '/assets/logos/the-nu.png',
+      alt: 'NU Pro logo',
+      dimensions: '360\u00d7360 (square, transparent PNG)',
     },
     mockups: [
       {
         src: '/assets/the-nu/screen-1.png',
-        alt: 'The NU app — home screen',
-        dimensions: '1170\u00d72532 (iPhone portrait screenshot, PNG)',
+        alt: 'NU Pro app — welcome screen',
+        dimensions: 'Pre-framed PNG (device frame included), portrait ~765\u00d71518',
       },
       {
         src: '/assets/the-nu/screen-2.png',
-        alt: 'The NU app — insights screen',
-        dimensions: '1170\u00d72532 (iPhone portrait screenshot, PNG)',
+        alt: 'NU Pro app — home screen',
+        dimensions: 'Pre-framed PNG (device frame included), portrait ~765\u00d71518',
       },
       {
         src: '/assets/the-nu/screen-3.png',
-        alt: 'The NU app — activity screen',
-        dimensions: '1170\u00d72532 (iPhone portrait screenshot, PNG)',
+        alt: 'NU Pro app — digital twin screen',
+        dimensions: 'Pre-framed PNG (device frame included), portrait ~765\u00d71518',
+      },
+      {
+        src: '/assets/the-nu/screen-4.png',
+        alt: 'NU Pro app — insights screen',
+        dimensions: 'Pre-framed PNG (device frame included), portrait ~765\u00d71518',
+      },
+      {
+        src: '/assets/the-nu/screen-5.png',
+        alt: 'NU Pro app — food screen',
+        dimensions: 'Pre-framed PNG (device frame included), portrait ~765\u00d71518',
+      },
+      {
+        src: '/assets/the-nu/screen-6.png',
+        alt: 'NU Pro app — health profile screen',
+        dimensions: 'Pre-framed PNG (device frame included), portrait ~765\u00d71518',
+      },
+    {
+        src: '/assets/the-nu/screen-7.png',
+        alt: 'NU Pro app — health wallet screen',
+        dimensions: 'Pre-framed PNG (device frame included), portrait ~765\u00d71518',
       },
     ],
   },
@@ -214,56 +236,45 @@ export const projects: Project[] = [
     role: 'Senior Software Engineer',
     stack: ['Node.js', 'MongoDB', 'Stripe'],
     logo: {
-      src: '/assets/logos/avant2go.svg',
+      src: '/assets/logos/avant2go.png',
       alt: 'Avant2GO logo',
-      dimensions: '512\u00d7512 (square, transparent PNG/SVG)',
+      dimensions: '360\u00d7360 (square, transparent PNG)',
     },
-    mockups: [
-      {
-        src: '/assets/avant2go/screen-1.png',
-        alt: 'Avant2GO — map screen',
-        dimensions: '1170\u00d72532 (iPhone portrait screenshot, PNG)',
-      },
-      {
-        src: '/assets/avant2go/screen-2.png',
-        alt: 'Avant2GO — booking screen',
-        dimensions: '1170\u00d72532 (iPhone portrait screenshot, PNG)',
-      },
-      {
-        src: '/assets/avant2go/screen-3.png',
-        alt: 'Avant2GO — trip screen',
-        dimensions: '1170\u00d72532 (iPhone portrait screenshot, PNG)',
-      },
-    ],
+    mockups: [],
+    showcase: {
+      src: '/assets/avant2go/product.png',
+      alt: 'Avant2GO product artwork',
+      dimensions: 'Transparent PNG, portrait-ish (e.g. 900\u00d71000); shown centered, object-contain',
+    },
   },
   {
     id: 'amzs',
-    name: 'AMZS Route Planner',
+    name: 'AMZS NOMO',
     tagline: 'Multi-modal routing · Flutter',
     description:
       'A multi-modal route-planning mobile app for AMZS, built as the sole mobile developer. This was the project where I evaluated the mobile landscape and selected Flutter during its v1\u2192v2 transition.',
     role: 'Junior Software Engineer',
     stack: ['Flutter', 'Dart'],
     logo: {
-      src: '/assets/logos/amzs.svg',
+      src: '/assets/logos/amzs.png',
       alt: 'AMZS logo',
-      dimensions: '512\u00d7512 (square, transparent PNG/SVG)',
+      dimensions: '360\u00d7360 (square, transparent PNG)',
     },
     mockups: [
       {
         src: '/assets/amzs/screen-1.png',
-        alt: 'AMZS route planner — route screen',
-        dimensions: '1170\u00d72532 (iPhone portrait screenshot, PNG)',
+        alt: 'AMZS route planner — map screen',
+        dimensions: 'Pre-framed PNG (device frame included), portrait ~765\u00d71518',
       },
       {
         src: '/assets/amzs/screen-2.png',
-        alt: 'AMZS route planner — map screen',
-        dimensions: '1170\u00d72532 (iPhone portrait screenshot, PNG)',
+        alt: 'AMZS route planner — route selection screen',
+        dimensions: 'Pre-framed PNG (device frame included), portrait ~765\u00d71518',
       },
       {
         src: '/assets/amzs/screen-3.png',
-        alt: 'AMZS route planner — steps screen',
-        dimensions: '1170\u00d72532 (iPhone portrait screenshot, PNG)',
+        alt: 'AMZS route planner — route overview screen',
+        dimensions: 'Pre-framed PNG (device frame included), portrait ~765\u00d71518',
       },
     ],
   },
