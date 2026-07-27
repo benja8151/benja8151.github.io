@@ -1,77 +1,127 @@
-// Horizontal screenshot carousels. Touch/trackpad swipe works natively via an
-// overflow-x-auto + scroll-snap track; desktop gets prev/next buttons and dots.
-// Idempotent: a data-flag prevents double-binding if this runs more than once.
+// Transform-based screenshot carousel: a dominant centered slide with dimmed,
+// edge-faded peeks of the neighbours, pointer-drag swipe (touch + mouse),
+// desktop prev/next buttons, dots and keyboard support. Non-looping: it clamps
+// at the first/last slide and disables the arrows there.
+//
+// Position is controlled via `transform: translateX(...)` on the track (not
+// native scroll), so the centered slide + peeks are laid out precisely.
 
+const DIMMED_SLIDE = ['opacity-40', 'scale-[0.92]'];
 const ACTIVE_DOT = ['bg-accent-400', 'w-5'];
 const INACTIVE_DOT = ['bg-fog-500/40', 'w-2'];
+const TRANSITION = 'transform 400ms cubic-bezier(0.22, 1, 0.36, 1)';
+// Drag distance (fraction of a slide step) needed to advance a slide.
+const SWIPE_FRACTION = 0.2;
 
 function initCarousel(root: HTMLElement): void {
   if (root.dataset.carouselReady === 'true') return;
   root.dataset.carouselReady = 'true';
 
+  const viewport = root.querySelector<HTMLElement>('[data-viewport]');
   const track = root.querySelector<HTMLElement>('[data-track]');
-  if (!track) return;
-  const slides = Array.from(root.querySelectorAll<HTMLElement>('[data-slide]'));
+  if (!viewport || !track) return;
+  const slides = Array.from(track.querySelectorAll<HTMLElement>('[data-slide]'));
+  const dots = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-dot]'));
   const prev = root.querySelector<HTMLButtonElement>('[data-prev]');
   const next = root.querySelector<HTMLButtonElement>('[data-next]');
-  const dots = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-dot]'));
+  const n = slides.length;
+  if (n === 0) return;
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const behavior: ScrollBehavior = prefersReduced ? 'auto' : 'smooth';
+  let index = 0;
 
-  // Each slide is exactly one track-width wide, so the carousel pages one
-  // screenshot at a time regardless of the phone-frame size inside it.
-  const currentIndex = (): number =>
-    track.clientWidth > 0
-      ? Math.round(track.scrollLeft / track.clientWidth)
-      : 0;
-
-  const scrollToIndex = (i: number): void => {
-    const clamped = Math.max(0, Math.min(i, slides.length - 1));
-    track.scrollTo({ left: clamped * track.clientWidth, behavior });
+  // translateX that centers slide `i` in the viewport.
+  const offsetFor = (i: number): number => {
+    const slide = slides[i];
+    return viewport.clientWidth / 2 - (slide.offsetLeft + slide.offsetWidth / 2);
   };
 
-  const atStart = (): boolean => track.scrollLeft <= 1;
-  const atEnd = (): boolean =>
-    track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
+  const setTransform = (x: number, animate: boolean): void => {
+    track.style.transition = animate && !prefersReduced ? TRANSITION : 'none';
+    track.style.transform = `translateX(${x}px)`;
+  };
 
-  let ticking = false;
-  const sync = (): void => {
-    ticking = false;
-    const idx = currentIndex();
+  const render = (): void => {
+    slides.forEach((slide, i) => {
+      const active = i === index;
+      for (const cls of DIMMED_SLIDE) slide.classList.toggle(cls, !active);
+    });
     dots.forEach((dot, i) => {
-      const active = i === idx;
+      const active = i === index;
       dot.classList.remove(...(active ? INACTIVE_DOT : ACTIVE_DOT));
       dot.classList.add(...(active ? ACTIVE_DOT : INACTIVE_DOT));
     });
-    if (prev) prev.disabled = atStart();
-    if (next) next.disabled = atEnd();
-  };
-  const onScroll = (): void => {
-    if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(sync);
-    }
+    if (prev) prev.disabled = index <= 0;
+    if (next) next.disabled = index >= n - 1;
   };
 
-  prev?.addEventListener('click', () => scrollToIndex(currentIndex() - 1));
-  next?.addEventListener('click', () => scrollToIndex(currentIndex() + 1));
-  dots.forEach((dot, i) => dot.addEventListener('click', () => scrollToIndex(i)));
+  const goTo = (raw: number, animate = true): void => {
+    index = Math.max(0, Math.min(raw, n - 1));
+    setTransform(offsetFor(index), animate);
+    render();
+  };
 
-  // Arrow-key navigation when the track is focused.
-  track.addEventListener('keydown', (e: KeyboardEvent) => {
+  prev?.addEventListener('click', () => goTo(index - 1));
+  next?.addEventListener('click', () => goTo(index + 1));
+  dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+
+  viewport.addEventListener('keydown', (e: KeyboardEvent) => {
     if (e.key === 'ArrowRight') {
       e.preventDefault();
-      scrollToIndex(currentIndex() + 1);
+      goTo(index + 1);
     } else if (e.key === 'ArrowLeft') {
       e.preventDefault();
-      scrollToIndex(currentIndex() - 1);
+      goTo(index - 1);
     }
   });
 
-  track.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
-  sync();
+  // --- Pointer drag / swipe (unifies touch + mouse via Pointer Events).
+  let dragging = false;
+  let startX = 0;
+  let baseX = 0;
+  const step = (): number => {
+    const s = slides[0];
+    const gap = slides[1] ? slides[1].offsetLeft - (s.offsetLeft + s.offsetWidth) : 0;
+    return s.offsetWidth + Math.max(0, gap);
+  };
+
+  const onPointerDown = (e: PointerEvent): void => {
+    if (e.button != null && e.button !== 0) return;
+    dragging = true;
+    startX = e.clientX;
+    baseX = offsetFor(index);
+    setTransform(baseX, false);
+    viewport.setPointerCapture?.(e.pointerId);
+  };
+  const onPointerMove = (e: PointerEvent): void => {
+    if (!dragging) return;
+    setTransform(baseX + (e.clientX - startX), false);
+  };
+  const onPointerUp = (e: PointerEvent): void => {
+    if (!dragging) return;
+    dragging = false;
+    viewport.releasePointerCapture?.(e.pointerId);
+    const delta = e.clientX - startX;
+    const moved = Math.round(delta / step());
+    let target = index - moved;
+    if (moved === 0 && Math.abs(delta) > step() * SWIPE_FRACTION) {
+      target = index - Math.sign(delta);
+    }
+    goTo(target);
+  };
+
+  viewport.addEventListener('pointerdown', onPointerDown);
+  viewport.addEventListener('pointermove', onPointerMove);
+  viewport.addEventListener('pointerup', onPointerUp);
+  viewport.addEventListener('pointercancel', onPointerUp);
+
+  // Keep centered on resize / late layout (images, fonts).
+  const recenter = (): void => setTransform(offsetFor(index), false);
+  window.addEventListener('resize', recenter, { passive: true });
+  window.addEventListener('load', recenter);
+  if ('ResizeObserver' in window) new ResizeObserver(recenter).observe(viewport);
+
+  goTo(0, false);
 }
 
 export function initCarousels(): void {
