@@ -76,7 +76,7 @@ export const profile: Profile = {
   },
   image: '/assets/profile.png',
   imageAlt: 'Portrait of Benjamin Smrdelj',
-  cvPdf: '/cv-placeholder.pdf',
+  cvPdf: '/Benjamin-Smrdelj-CV.pdf',
 };
 
 // Condensed, web-tightened version of the CV About Me text.
