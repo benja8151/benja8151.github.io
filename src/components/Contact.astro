@@ -1,17 +1,16 @@
 ---
-import { profile } from '../data/cv';
+import { getContent } from '../data/cv';
+const { profile, ui } = getContent(Astro.currentLocale);
 const { social } = profile;
+const c = ui.sections.contact;
 const year = new Date().getFullYear();
 ---
 
 <footer id="contact" class="scroll-mt-20 border-t border-white/5 py-24">
   <div class="mx-auto max-w-5xl px-5 text-center sm:px-8">
-    <p class="eyebrow">Contact</p>
-    <h2 class="reveal mt-3 text-3xl font-semibold tracking-tight text-fog-100 sm:text-4xl">
-      Let&rsquo;s build something.
-    </h2>
+    <p class="eyebrow">{c.eyebrow}</p>
     <p class="reveal mx-auto mt-4 max-w-xl leading-relaxed text-fog-400">
-      Open to interesting mobile and full-stack work. The fastest way to reach me is email.
+      {c.title}
     </p>
 
     <a
@@ -39,7 +38,7 @@ const year = new Date().getFullYear();
     </div>
 
     <p class="mt-16 font-mono text-xs text-fog-500">
-      &copy; {year} {profile.name} &middot; Built with Astro &amp; Tailwind
+      &copy; {year} {profile.name} &middot; {c.footer}
     </p>
   </div>
 </footer>

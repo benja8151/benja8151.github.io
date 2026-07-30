@@ -1,30 +1,40 @@
 ---
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
-import { profile } from '../data/cv';
+import { getContent, type Locale } from '../data/cv';
 
 interface Props {
   title?: string;
   description?: string;
 }
 
+const loc: Locale = Astro.currentLocale === 'sl' ? 'sl' : 'en';
+const { profile, ui } = getContent(loc);
+
 const {
   title = `${profile.name} — ${profile.tagline}`,
-  description = 'Portfolio of Benjamin Smrdelj, a Full-Stack & Mobile Engineer specializing in Flutter, Go, Node.js and serverless AWS. Building production mobile apps and backend systems.',
+  description = ui.metaDescription,
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://benja8151.github.io').href;
-const ogImage = new URL('/assets/og-image.svg', Astro.site ?? 'https://benja8151.github.io').href;
+const siteBase = Astro.site ?? new URL('https://benja8151.github.io');
+const canonical = new URL(loc === 'sl' ? '/sl/' : '/', siteBase).href;
+const enUrl = new URL('/', siteBase).href;
+const slUrl = new URL('/sl/', siteBase).href;
+const ogImage = new URL('/assets/og-image.svg', siteBase).href;
+const ogLocale = loc === 'sl' ? 'sl_SI' : 'en_US';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={loc}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="sl" href={slUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <meta name="author" content={profile.name} />
     <meta name="theme-color" content="#0d1117" />
@@ -37,6 +47,7 @@ const ogImage = new URL('/assets/og-image.svg', Astro.site ?? 'https://benja8151
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:site_name" content={profile.name} />
+    <meta property="og:locale" content={ogLocale} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -45,6 +56,32 @@ const ogImage = new URL('/assets/og-image.svg', Astro.site ?? 'https://benja8151
     <meta name="twitter:image" content={ogImage} />
 
     <meta name="generator" content={Astro.generator} />
+
+    <script is:inline>
+      // First-visit language: honor a stored choice, else fall back to the
+      // browser language (Slovenian -> /sl/). A session flag avoids loops.
+      (function () {
+        try {
+          var path = location.pathname;
+          var isSL = path === '/sl' || path.indexOf('/sl/') === 0;
+          var cur = isSL ? 'sl' : 'en';
+          var stored = localStorage.getItem('lang');
+          var redirected = sessionStorage.getItem('langRedirected');
+          var target = null;
+          if (stored === 'sl' || stored === 'en') {
+            if (stored !== cur) target = stored;
+          } else if (!redirected) {
+            var pref = (navigator.languages && navigator.languages[0]) || navigator.language || 'en';
+            var want = /^sl/i.test(pref) ? 'sl' : 'en';
+            if (want !== cur) target = want;
+          }
+          if (target && !redirected) {
+            sessionStorage.setItem('langRedirected', '1');
+            location.replace(target === 'sl' ? '/sl/' : '/');
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <a

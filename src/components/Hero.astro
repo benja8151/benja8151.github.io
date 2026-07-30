@@ -1,5 +1,6 @@
 ---
-import { profile } from '../data/cv';
+import { getContent } from '../data/cv';
+const { profile, ui } = getContent(Astro.currentLocale);
 const { social } = profile;
 ---
 
@@ -29,7 +30,7 @@ const { social } = profile;
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          Download CV
+          {ui.downloadCv}
         </a>
         <a
           href={`https://github.com/${social.github.split('/').pop()}`}
@@ -49,7 +50,7 @@ const { social } = profile;
           href={`mailto:${social.email}`}
           class="rounded-full border border-white/10 px-5 py-2.5 text-sm font-medium text-fog-200 transition-colors hover:border-white/25 hover:text-fog-100"
         >
-          Email
+          {ui.emailLabel}
         </a>
       </div>
     </div>

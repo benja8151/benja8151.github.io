@@ -1,9 +1,15 @@
 ---
-import { profile, sections } from '../data/cv';
+import { getContent, type Locale } from '../data/cv';
+const loc: Locale = Astro.currentLocale === 'sl' ? 'sl' : 'en';
+const { profile, sections, ui } = getContent(loc);
 const initials = profile.name
   .split(' ')
   .map((w) => w[0])
   .join('');
+
+const langLink = 'font-mono text-xs px-1.5 py-0.5 rounded transition-colors';
+const langActive = 'text-accent-300 font-medium';
+const langIdle = 'text-fog-500 hover:text-fog-200';
 ---
 
 <header
@@ -20,21 +26,50 @@ const initials = profile.name
       {
         sections.map((s) => (
           <li>
-            <a
-              href={`#${s.id}`}
-              class="transition-colors hover:text-fog-100"
-            >
+            <a href={`#${s.id}`} class="transition-colors hover:text-fog-100">
               {s.label}
             </a>
           </li>
         ))
       }
     </ul>
-    <a
-      href={profile.cvPdf}
-      class="rounded-full border border-accent-500/40 bg-accent-500/10 px-4 py-1.5 text-xs font-medium text-accent-300 transition-colors hover:bg-accent-500/20"
-    >
-      CV
-    </a>
+    <div class="flex items-center gap-3">
+      <div class="flex items-center" role="group" aria-label="Language">
+        <a
+          href="/"
+          data-set-lang="en"
+          hreflang="en"
+          class={`${langLink} ${loc === 'en' ? langActive : langIdle}`}
+          aria-current={loc === 'en' ? 'true' : undefined}
+        >
+          EN
+        </a>
+        <span class="text-fog-600" aria-hidden="true">/</span>
+        <a
+          href="/sl/"
+          data-set-lang="sl"
+          hreflang="sl"
+          class={`${langLink} ${loc === 'sl' ? langActive : langIdle}`}
+          aria-current={loc === 'sl' ? 'true' : undefined}
+        >
+          SL
+        </a>
+      </div>
+      <a
+        href={profile.cvPdf}
+        class="rounded-full border border-accent-500/40 bg-accent-500/10 px-4 py-1.5 text-xs font-medium text-accent-300 transition-colors hover:bg-accent-500/20"
+      >
+        {ui.cvShort}
+      </a>
+    </div>
   </nav>
 </header>
+
+<script is:inline>
+  // Remember the visitor's language choice when they use the toggle.
+  document.querySelectorAll('[data-set-lang]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      try { localStorage.setItem('lang', a.getAttribute('data-set-lang')); } catch (e) {}
+    });
+  });
+</script>

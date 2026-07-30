@@ -1,9 +1,11 @@
 ---
 import Section from './Section.astro';
-import { skills } from '../data/cv';
+import { getContent } from '../data/cv';
+const { skills, ui } = getContent(Astro.currentLocale);
+const s = ui.sections.skills;
 ---
 
-<Section id="skills" eyebrow="Skills" title="Tools & technologies">
+<Section id="skills" eyebrow={s.eyebrow} title={s.title}>
   <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
     {
       skills.map((group) => (
@@ -12,14 +14,14 @@ import { skills } from '../data/cv';
             {group.category}
           </h3>
           <div class="mt-4 flex flex-wrap gap-2">
-            {group.proficient.map((s) => (
+            {group.proficient.map((sk) => (
               <span class="rounded-md border border-accent-500/30 bg-accent-500/10 px-2.5 py-1 text-sm font-medium text-accent-300">
-                {s}
+                {sk}
               </span>
             ))}
-            {group.familiar.map((s) => (
+            {group.familiar.map((sk) => (
               <span class="rounded-md border border-white/10 px-2.5 py-1 text-sm text-fog-400">
-                {s}
+                {sk}
               </span>
             ))}
           </div>
@@ -30,11 +32,11 @@ import { skills } from '../data/cv';
   <p class="reveal mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-fog-500">
     <span class="flex items-center gap-2">
       <span class="inline-block h-3 w-3 rounded-sm border border-accent-500/30 bg-accent-500/10"></span>
-      Proficient
+      {ui.proficient}
     </span>
     <span class="flex items-center gap-2">
       <span class="inline-block h-3 w-3 rounded-sm border border-white/10"></span>
-      Familiar with
+      {ui.familiar}
     </span>
   </p>
 </Section>

@@ -1,12 +1,14 @@
 ---
 import Section from './Section.astro';
 import Carousel from './Carousel.astro';
-import { projects } from '../data/cv';
+import { getContent } from '../data/cv';
+const { projects, ui } = getContent(Astro.currentLocale);
+const sec = ui.sections.projects;
 const featured = projects.find((p) => p.featured)!;
 const rest = projects.filter((p) => !p.featured);
 ---
 
-<Section id="projects" eyebrow="Showcase" title="Products I've built">
+<Section id="projects" eyebrow={sec.eyebrow} title={sec.title}>
   <!-- Featured: The NU (largest visual treatment) -->
   <article class="reveal grid items-center gap-8 rounded-3xl border border-white/5 bg-ink-900/40 p-6 sm:p-10 lg:grid-cols-2 lg:gap-12">
     <div class="order-2 lg:order-1">

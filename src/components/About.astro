@@ -1,9 +1,11 @@
 ---
 import Section from './Section.astro';
-import { about } from '../data/cv';
+import { getContent } from '../data/cv';
+const { about, ui } = getContent(Astro.currentLocale);
+const s = ui.sections.about;
 ---
 
-<Section id="about" eyebrow="About" title="Working across the stack">
+<Section id="about" eyebrow={s.eyebrow} title={s.title}>
   <div class="reveal max-w-3xl space-y-5 text-lg leading-relaxed text-fog-400">
     {about.map((p) => <p>{p}</p>)}
   </div>

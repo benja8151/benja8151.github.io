@@ -1,12 +1,14 @@
 ---
 import Section from './Section.astro';
-import { experience } from '../data/cv';
+import { getContent } from '../data/cv';
+const { experience, ui } = getContent(Astro.currentLocale);
+const sec = ui.sections.experience;
 // Render newest-first so the reader lands on the current role, but the rail
 // still connects the full chronology.
 const roles = [...experience].reverse();
 ---
 
-<Section id="experience" eyebrow="Experience" title="A path through the stack">
+<Section id="experience" eyebrow={sec.eyebrow} title={sec.title}>
   <div id="timeline" class="relative">
     <!-- Progress rail: the accent fill tip stays pinned to the viewport center
          as roles scroll through it (see src/scripts/timeline.ts). -->
