@@ -23,7 +23,8 @@ Responsible, reliable, and precise, with a self-critical streak that keeps me im
 | **Backend** | Go, Node.js, REST APIs | Express, Fastify |
 | **Cloud & Databases** | AWS (Lambda, DynamoDB, Kinesis, S3, CloudFormation), MongoDB | Redis, Docker |
 | **Languages** | Dart, Go, TypeScript/JavaScript | Python, C#, C++ |
-| **Other** | Git (GitHub, GitLab), Codemagic, GitHub Actions, Sentry, Firebase, Figma, AI coding agents (Kiro, Codex, OpenCode) | Cypress, Stripe, Django |
+| **AI Tools** | Kiro (CLI + IDE), OpenCode | Codex, Claude Code, OpenSpec, OpenRouter, Pi |
+| **Other** | Git (GitHub, GitLab), Codemagic, GitHub Actions, Sentry, Firebase, Figma | Cypress, Stripe, Django |
 
 ## Experience
 

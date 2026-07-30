@@ -108,8 +108,13 @@ export const skills: SkillGroup[] = [
     familiar: ['Python', 'C#', 'C++'],
   },
   {
-    category: 'Tooling & Other',
-    proficient: ['Git', 'Codemagic', 'GitHub Actions', 'Sentry', 'Firebase', 'Figma', 'AI coding agents (Kiro, Codex, OpenCode)'],
+    category: 'AI Tools',
+    proficient: ['Kiro (CLI + IDE)', 'OpenCode'],
+    familiar: ['Codex', 'Claude Code', 'OpenSpec', 'OpenRouter', 'Pi'],
+  },
+  {
+    category: 'Other',
+    proficient: ['Git', 'Codemagic', 'GitHub Actions', 'Sentry', 'Firebase', 'Figma'],
     familiar: ['Cypress', 'Stripe', 'Django'],
   },
 ];
@@ -254,7 +259,7 @@ export const projects: Project[] = [
     description:
       'A multi-modal route-planning mobile app for AMZS, built as the sole mobile developer. This was the project where I evaluated the mobile landscape and selected Flutter during its v1\u2192v2 transition.',
     role: 'Junior Software Engineer',
-    stack: ['Flutter', 'Dart'],
+    stack: ['Flutter'],
     logo: {
       src: '/assets/logos/amzs.png',
       alt: 'AMZS logo',
