@@ -14,7 +14,7 @@ const year = new Date().getFullYear();
     </p>
 
     <a
-      href={`mailto:${social.email}`}
+      href={`mailto:${social.email}`} data-umami-event="email-click" data-umami-event-location="contact"
       class="reveal mt-8 inline-flex items-center gap-2 rounded-full bg-accent-500 px-6 py-3 text-base font-semibold text-ink-950 transition-colors hover:bg-accent-400"
     >
       {social.email}
@@ -22,14 +22,14 @@ const year = new Date().getFullYear();
 
     <div class="reveal mt-6 flex justify-center gap-3">
       <a
-        href={social.github}
+        href={social.github} data-umami-event="outbound-github" data-umami-event-location="contact"
         rel="noopener"
         class="rounded-full border border-white/10 px-5 py-2 text-sm font-medium text-fog-200 transition-colors hover:border-white/25 hover:text-fog-100"
       >
         GitHub
       </a>
       <a
-        href={social.linkedin}
+        href={social.linkedin} data-umami-event="outbound-linkedin" data-umami-event-location="contact"
         rel="noopener"
         class="rounded-full border border-white/10 px-5 py-2 text-sm font-medium text-fog-200 transition-colors hover:border-white/25 hover:text-fog-100"
       >

@@ -32,6 +32,20 @@ same filenames and aspect ratios and the layout won't change — see
 [`public/assets/README.md`](public/assets/README.md). Asset paths are centralized in
 `src/data/cv.ts`. Replace `public/cv-placeholder.pdf` with the real CV PDF.
 
+## Analytics
+Privacy-conscious analytics via **[Umami Cloud](https://umami.is)** — cookieless (no consent
+banner needed) and honors the browser's Do Not Track. The tracking snippet lives in
+[`src/layouts/Base.astro`](src/layouts/Base.astro), gated to `import.meta.env.PROD` so it only
+loads on the deployed site, not local dev. The website ID is public and hardcoded there.
+
+Tracked events (in addition to page views/visitors):
+- `cv-download` — CV button clicks, with `lang` (en/sl) and `location` (hero/nav)
+- `outbound-github`, `outbound-linkedin`, `email-click` — outbound clicks, with `location`
+- `lang-switch` — language toggle, with `to` (en/sl)
+- `nav-click` — nav section links, with `section`
+- `scroll-reached-end` — fired once when the Contact section is reached
+  (see [`src/scripts/analytics.ts`](src/scripts/analytics.ts))
+
 ## Deployment
 Pushing to `main` triggers [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml),
 which builds with `withastro/action` and publishes via `actions/deploy-pages`.

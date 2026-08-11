@@ -1,0 +1,103 @@
+{
+  "stage": "facts",
+  "title": "Add privacy-conscious analytics + CV download tracking",
+  "goalSlug": "website-analytics",
+  "facts": [
+    {
+      "id": "fact-script",
+      "text": "Umami Cloud analytics is loaded via a single script tag in the shared <head> (src/layouts/Base.astro), so it applies to both the EN (/) and SLO (/sl/) pages.",
+      "accepted": false,
+      "removed": false,
+      "recommendedAutomatedVerification": true,
+      "automatedVerification": true
+    },
+    {
+      "id": "fact-id-config",
+      "text": "The Umami website ID and script src are set from the value the user provides (a single place in the layout/config), not scattered across files.",
+      "accepted": false,
+      "removed": false,
+      "recommendedAutomatedVerification": true,
+      "automatedVerification": true
+    },
+    {
+      "id": "fact-prod-only",
+      "text": "The analytics script loads only on the production site and is absent during local dev (astro dev / preview of a dev build).",
+      "accepted": false,
+      "removed": false,
+      "recommendedAutomatedVerification": true,
+      "automatedVerification": true
+    },
+    {
+      "id": "fact-dnt",
+      "text": "The analytics respects the browser Do Not Track setting (Umami data-do-not-track enabled).",
+      "accepted": false,
+      "removed": false,
+      "recommendedAutomatedVerification": true,
+      "automatedVerification": true
+    },
+    {
+      "id": "fact-no-banner",
+      "text": "No cookie consent banner and no privacy note are added; the integration stays cookieless.",
+      "accepted": false,
+      "removed": false,
+      "recommendedAutomatedVerification": true,
+      "automatedVerification": true
+    },
+    {
+      "id": "fact-cv",
+      "text": "Clicking either 'Download CV' link (hero + nav) fires a tracked event that distinguishes the EN PDF from the SLO PDF.",
+      "accepted": false,
+      "removed": false,
+      "recommendedAutomatedVerification": true,
+      "automatedVerification": true
+    },
+    {
+      "id": "fact-outbound",
+      "text": "Clicks on outbound links — LinkedIn, GitHub, and email (mailto) — each fire a distinct tracked event.",
+      "accepted": false,
+      "removed": false,
+      "recommendedAutomatedVerification": true,
+      "automatedVerification": true
+    },
+    {
+      "id": "fact-lang",
+      "text": "Using the language toggle (EN <-> SL) fires a tracked event indicating the chosen language.",
+      "accepted": false,
+      "removed": false,
+      "recommendedAutomatedVerification": true,
+      "automatedVerification": true
+    },
+    {
+      "id": "fact-nav",
+      "text": "Clicking a nav-bar section link fires a tracked event identifying which section was clicked.",
+      "accepted": false,
+      "removed": false,
+      "recommendedAutomatedVerification": true,
+      "automatedVerification": true
+    },
+    {
+      "id": "fact-scroll",
+      "text": "Scroll depth is tracked: an event fires when the visitor reaches key milestones / sections of the page (e.g. 25/50/75/100% or per section).",
+      "accepted": false,
+      "removed": false,
+      "recommendedAutomatedVerification": false,
+      "automatedVerification": false
+    },
+    {
+      "id": "fact-nonblocking",
+      "text": "Tracking never breaks normal behavior: CV downloads, outbound links, language switching, and nav anchors all still work exactly as before with analytics enabled.",
+      "accepted": false,
+      "removed": false,
+      "recommendedAutomatedVerification": true,
+      "automatedVerification": true
+    },
+    {
+      "id": "fact-build",
+      "text": "The production build (npm run build) succeeds with the analytics integration in place.",
+      "accepted": false,
+      "removed": false,
+      "recommendedAutomatedVerification": true,
+      "automatedVerification": true
+    }
+  ]
+}

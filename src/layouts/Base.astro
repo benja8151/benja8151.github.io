@@ -57,6 +57,19 @@ const ogLocale = loc === 'sl' ? 'sl_SI' : 'en_US';
 
     <meta name="generator" content={Astro.generator} />
 
+    <!-- Umami Cloud analytics (cookieless, honors Do Not Track). Production only. -->
+    {
+      import.meta.env.PROD && (
+        <script
+          is:inline
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="ef4e37a6-1512-4d6f-8882-a35add85bf0c"
+          data-do-not-track="true"
+        />
+      )
+    }
+
     <script is:inline>
       // First-visit language: honor a stored choice, else fall back to the
       // browser language (Slovenian -> /sl/). A session flag avoids loops.
@@ -94,5 +107,10 @@ const ogLocale = loc === 'sl' ? 'sl_SI' : 'en_US';
     <main id="main">
       <slot />
     </main>
+
+    <script>
+      import { initAnalytics } from '../scripts/analytics';
+      initAnalytics();
+    </script>
   </body>
 </html>

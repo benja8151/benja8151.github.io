@@ -1,0 +1,80 @@
+{
+  "stage": "interview",
+  "title": "Add privacy-conscious analytics + CV download tracking",
+  "goalSlug": "website-analytics",
+  "questions": [
+    {
+      "id": "provider",
+      "prompt": "Which analytics provider should we use?",
+      "description": "The site is a static Astro build on GitHub Pages. All options below support seeing visits; the recommended ones are cookieless (no consent banner needed) and support custom events for CV-download tracking. Cost and setup effort differ.",
+      "answerMode": "single-custom",
+      "recommendedAnswer": "Umami Cloud — free tier, cookieless/GDPR-friendly, first-class custom events for CV downloads, one <script> tag. Good balance of free + capable.",
+      "recommendedOptionIds": ["umami"],
+      "options": [
+        { "id": "umami", "label": "Umami Cloud (free tier, cookieless, custom events)" },
+        { "id": "plausible", "label": "Plausible Cloud (paid ~$9/mo, polished, cookieless, goals)" },
+        { "id": "goatcounter", "label": "GoatCounter (free, cookieless, simpler events)" },
+        { "id": "cloudflare", "label": "Cloudflare Web Analytics (free, cookieless, limited custom events)" },
+        { "id": "ga4", "label": "Google Analytics 4 (free, powerful, but heavier + needs a consent banner)" }
+      ],
+      "required": true
+    },
+    {
+      "id": "events",
+      "prompt": "Beyond page views/visitors, which interactions should we track as events?",
+      "description": "Page views and visitor counts come by default. These are the extra click events worth capturing to answer 'are recruiters engaging?'",
+      "answerMode": "multi-custom",
+      "recommendedAnswer": "Track CV downloads (distinguishing EN vs SLO) and outbound clicks to LinkedIn / GitHub / email.",
+      "recommendedOptionIds": ["cv", "outbound"],
+      "options": [
+        { "id": "cv", "label": "CV downloads (distinguish EN vs SLO PDF)" },
+        { "id": "outbound", "label": "Outbound clicks: LinkedIn, GitHub, email (mailto)" },
+        { "id": "lang", "label": "Language toggle usage (EN <-> SL)" },
+        { "id": "scroll", "label": "Scroll depth / section reached" }
+      ],
+      "required": true
+    },
+    {
+      "id": "consent",
+      "prompt": "How should we handle privacy/consent?",
+      "description": "Cookieless providers generally don't require a cookie consent banner under GDPR, though a short privacy note is good practice. The site currently has no footer.",
+      "answerMode": "single-custom",
+      "recommendedAnswer": "No cookie banner (cookieless provider), plus a short one-line privacy note. I'd add a minimal footer to hold it since there isn't one today.",
+      "recommendedOptionIds": ["nobanner_note"],
+      "options": [
+        { "id": "nobanner_note", "label": "No banner + short privacy note (add minimal footer)" },
+        { "id": "nobanner_only", "label": "No banner, no note" },
+        { "id": "banner", "label": "Full cookie consent banner" }
+      ],
+      "required": true
+    },
+    {
+      "id": "credentials",
+      "prompt": "How should we handle the analytics account / tracking ID?",
+      "description": "Most providers give you a website ID + script src after you create an account. I can't create the account for you.",
+      "answerMode": "single-custom",
+      "recommendedAnswer": "I scaffold the integration reading the ID from a build-time env var (e.g. PUBLIC_UMAMI_WEBSITE_ID) with a placeholder; you create the account and drop in the real ID (also add it to the GitHub Actions deploy workflow).",
+      "recommendedOptionIds": ["env_placeholder"],
+      "options": [
+        { "id": "env_placeholder", "label": "Scaffold with env var + placeholder; I fill in the real ID later" },
+        { "id": "give_now", "label": "I'll create the account now and paste the ID/snippet into chat" },
+        { "id": "hardcode", "label": "Hardcode the ID directly in the layout once I have it" }
+      ],
+      "required": true
+    },
+    {
+      "id": "loading",
+      "prompt": "Any loading constraints for the analytics script?",
+      "description": "Sensible defaults to avoid skewing your own numbers and to respect privacy signals.",
+      "answerMode": "multi-custom",
+      "recommendedAnswer": "Load only on the production site (skip local dev), and don't count visits from your own machine if the provider supports it.",
+      "recommendedOptionIds": ["prod_only", "exclude_self"],
+      "options": [
+        { "id": "prod_only", "label": "Only load on production (not local dev)" },
+        { "id": "exclude_self", "label": "Exclude my own visits where possible" },
+        { "id": "dnt", "label": "Respect Do Not Track browser setting" }
+      ],
+      "required": false
+    }
+  ]
+}

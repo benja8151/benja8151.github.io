@@ -2,6 +2,7 @@
 import { getContent } from '../data/cv';
 const { profile, ui } = getContent(Astro.currentLocale);
 const { social } = profile;
+const loc = Astro.currentLocale === 'sl' ? 'sl' : 'en';
 ---
 
 <section id="top" class="bg-hero-glow relative">
@@ -24,7 +25,7 @@ const { social } = profile;
 
       <div class="reveal mt-9 flex flex-wrap items-center gap-3">
         <a
-          href={profile.cvPdf}
+          href={profile.cvPdf} data-umami-event="cv-download" data-umami-event-lang={loc} data-umami-event-location="hero"
           class="inline-flex items-center gap-2 rounded-full bg-accent-500 px-5 py-2.5 text-sm font-semibold text-ink-950 transition-colors hover:bg-accent-400"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -33,21 +34,21 @@ const { social } = profile;
           {ui.downloadCv}
         </a>
         <a
-          href={`https://github.com/${social.github.split('/').pop()}`}
+          href={`https://github.com/${social.github.split('/').pop()}`} data-umami-event="outbound-github" data-umami-event-location="hero"
           class="rounded-full border border-white/10 px-5 py-2.5 text-sm font-medium text-fog-200 transition-colors hover:border-white/25 hover:text-fog-100"
           rel="noopener"
         >
           GitHub
         </a>
         <a
-          href={social.linkedin}
+          href={social.linkedin} data-umami-event="outbound-linkedin" data-umami-event-location="hero"
           class="rounded-full border border-white/10 px-5 py-2.5 text-sm font-medium text-fog-200 transition-colors hover:border-white/25 hover:text-fog-100"
           rel="noopener"
         >
           LinkedIn
         </a>
         <a
-          href={`mailto:${social.email}`}
+          href={`mailto:${social.email}`} data-umami-event="email-click" data-umami-event-location="hero"
           class="rounded-full border border-white/10 px-5 py-2.5 text-sm font-medium text-fog-200 transition-colors hover:border-white/25 hover:text-fog-100"
         >
           {ui.emailLabel}

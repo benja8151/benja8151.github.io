@@ -26,7 +26,7 @@ const langIdle = 'text-fog-500 hover:text-fog-200';
       {
         sections.map((s) => (
           <li>
-            <a href={`#${s.id}`} class="transition-colors hover:text-fog-100">
+            <a href={`#${s.id}`} data-umami-event="nav-click" data-umami-event-section={s.id} class="transition-colors hover:text-fog-100">
               {s.label}
             </a>
           </li>
@@ -38,6 +38,8 @@ const langIdle = 'text-fog-500 hover:text-fog-200';
         <a
           href="/"
           data-set-lang="en"
+          data-umami-event="lang-switch"
+          data-umami-event-to="en"
           hreflang="en"
           class={`${langLink} ${loc === 'en' ? langActive : langIdle}`}
           aria-current={loc === 'en' ? 'true' : undefined}
@@ -48,6 +50,8 @@ const langIdle = 'text-fog-500 hover:text-fog-200';
         <a
           href="/sl/"
           data-set-lang="sl"
+          data-umami-event="lang-switch"
+          data-umami-event-to="sl"
           hreflang="sl"
           class={`${langLink} ${loc === 'sl' ? langActive : langIdle}`}
           aria-current={loc === 'sl' ? 'true' : undefined}
@@ -56,7 +60,7 @@ const langIdle = 'text-fog-500 hover:text-fog-200';
         </a>
       </div>
       <a
-        href={profile.cvPdf}
+        href={profile.cvPdf} data-umami-event="cv-download" data-umami-event-lang={loc} data-umami-event-location="nav"
         class="rounded-full border border-accent-500/40 bg-accent-500/10 px-4 py-1.5 text-xs font-medium text-accent-300 transition-colors hover:bg-accent-500/20"
       >
         {ui.cvShort}
